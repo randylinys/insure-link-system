@@ -1,0 +1,11 @@
+version: '3.9'
+
+services:
+    api-server:
+        image: api-server
+        container_name: api-server
+        restart: always
+        volumes:
+            - ~/logs:/sample/logs
+            - /etc/timezone:/etc/timezone:ro
+            - /etc/localtime:/etc/localtime:ro
