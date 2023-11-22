@@ -62,11 +62,11 @@ SELECT code, name, registration_date, introducer_code FROM Tree WHERE level <= 4
 ### 給定code，取出左線或右線的人數(以0000000002為例，取出左線總數)
 ```sql
 WITH RECURSIVE Tree AS (
-    SELECT code, name, registration_date, introducer_code, 1 AS level
+    SELECT code, introducer_code AS level
     FROM policyholders
     WHERE code = (SELECT code FROM policyholders WHERE introducer_code = '0000000002' AND tree_child_direction = 'left')
     UNION
-    SELECT p.code, p.name, p.registration_date, p.introducer_code, t.level+1
+    SELECT p.code, p.introducer_code
     FROM policyholders AS p
     JOIN Tree AS t ON p.introducer_code = t.code
 )
